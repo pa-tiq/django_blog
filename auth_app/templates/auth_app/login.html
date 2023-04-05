@@ -1,4 +1,4 @@
-{% extends "blog/templates/blog/base.html" %} {% block content %}
+{% extends "blog/base.html" %} {% block content %}
 <div class="h-100 p-5 bg-light border rounded-3">
   <h1>Login</h1>
   <form action="{% url 'auth_app:login' %}" method="POST">
