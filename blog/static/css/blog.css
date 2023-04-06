@@ -4,6 +4,14 @@
   margin-bottom: 10px;
 }
 
+body{
+  background-color: lightgray;
+}
+
+.inline{
+  display: inline; 
+}
+
 .bigbrand{
   font-size: 1.6em;
 }
@@ -14,7 +22,7 @@
 }
 
 .container{
-  margin-top: 5.5rem;
+  margin-top: 6rem;
 } 
 
 .postdate{
@@ -30,10 +38,9 @@
   font-size: 1.5em;
 }
 
-.btn-comment{
-  position:absolute;
-  right:0px;
-}
+/* .btn-comment{
+  right: 1px;
+} */
 
 .loader {
   filter: hue-rotate(0deg);

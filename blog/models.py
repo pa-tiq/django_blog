@@ -20,7 +20,7 @@ class Post(models.Model):
     # the absolute_url is where you'll be redirected to after creating a Post
     # the absolute_url is post_detail/post_primary_key
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"pk": self.pk})
+        return reverse("blog:post_detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
@@ -41,7 +41,7 @@ class Comment(models.Model):
         self.save()
 
     def get_absolute_url(self):
-        return reverse("post_detail", kwargs={"pk": self.post})
+        return reverse("blog:post_detail", kwargs={"pk": self.post})
 
     def __str__(self):
         return self.text

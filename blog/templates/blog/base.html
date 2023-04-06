@@ -76,22 +76,22 @@
             </li>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog:about' %}" 
-                >About
-              </a>
+              <a class="nav-link" href="{% url 'blog:about' %}">About </a>
             </li>
           </ul>
           {% if user.is_authenticated %}
-          <ul class="navbar-nav navbar-right me-auto mb-2 mb-md-0">
+          <ul class="navbar-nav navbar-right">
             <li class="nav-item">
-              <a style='color: white; margin-right:1rem;'>Welcome, {{user.username}}!</a>
+              <a class="nav-link disabled" style="color: white"
+                >Welcome, {{user.username}}!</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth_app:logout' %}">Logout</a>
             </li>
           </ul>
           {% else %}
-          <ul class="navbar-nav navbar-right me-auto mb-2 mb-md-0">
+          <ul class="navbar-nav navbar-right">
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth_app:register' %}"
                 >Register</a
@@ -99,8 +99,8 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'auth_app:login' %}"
-                ><span class="glyphicon glyphicon-user"></span
-              >Login</a>
+                ><span class="glyphicon glyphicon-user"></span>Login</a
+              >
             </li>
           </ul>
           {% endif %}
@@ -108,14 +108,10 @@
       </div>
     </nav>
     <div class="content container">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="blog_posts">
-            {% block content %}
-            <!-- Anything outside of this will be inherited if you extend -->
-            {% endblock content%}
-          </div>
-        </div>
+      <div class="h-100 p-5 bg-light border rounded-3">
+        {% block content %}
+        <!-- Anything outside of this will be inherited if you extend -->
+        {% endblock content%}
       </div>
     </div>
     <script

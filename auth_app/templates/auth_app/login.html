@@ -2,11 +2,16 @@
 <div class="h-100 p-5 bg-light border rounded-3">
   <h1>Login</h1>
   <form action="{% url 'auth_app:login' %}" method="POST">
-    {% csrf_token %} 
+    {% csrf_token %}
+    <br> 
     <label for="username">Username:</label>
     <input type="text" name="username" placeholder="Enter your username"></input>
+    <br>
+    <br>
     <label for="password">Password:</label>
-    <input type="password" name="password"></input>
+    <input type="password" name="password" placeholder="*****"></input>
+    <br>
+    <br>
     <button class="btn btn-outline-primary" type="submit">Login</button>
   </form>
 </div>

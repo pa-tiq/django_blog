@@ -1,9 +1,20 @@
-{% extends 'blog/base.html' %} {% block content %} 
-{% for post in posts %}
-<div class="post">
-  <p class="date">Created at {{post.create_date|date:'d-m-Y'}}</p>
-  <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-  <p>{{post.text|truncatechars:200}}</p>
+{% extends 'blog/base.html' %} 
+{% block content %} 
+<div class="centerstage">
+  <ul class="list-group">
+    {% for post in posts %}
+      {% if post.author == user %}
+        <div class="post">
+          <p class="date">Created at {{post.create_date|date:'d-m-Y'}}</p>
+          <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+          <p>{{post.text|truncatechars:200}}</p>
+        </div>
+      {% endif %}
+      {% empty %}
+      <div class="h-100 p-5 bg-light border rounded-3">
+        <h1>You don't have any drafts!</h1>
+      </div>
+    {% endfor %} 
+  </ul>
 </div>
-{% endfor %} 
 {% endblock content %}

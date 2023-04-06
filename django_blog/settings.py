@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -133,7 +134,8 @@ STATICFILES_DIRS = [BASE_DIR / "blog/static"]
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_ROOT = "media/"
 
-LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = reverse_lazy('auth_app:login')
+LOGIN_REDIRECT_URL = reverse_lazy('auth_app:login')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

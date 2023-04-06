@@ -4,7 +4,7 @@ from blog.models import Post,Comment
 class PostForm(forms.ModelForm):
     class Meta():
         model = Post
-        fields = ('author','title','text')
+        fields = ('title','text')
         widgets = {
             'title': forms.TextInput(attrs={'class':'textinputclass'}), # this is the CSS class
             'text': forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'})
@@ -13,8 +13,9 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta():
         model = Comment
-        fields = ('author','text')
+        #fields = ('author','text')
+        fields = ('text',)
         widgets = {
-            'author': forms.TextInput(attrs={'class':'textinputclass'}),
+            #'author': forms.TextInput(attrs={'class':'textinputclass'}),
             'text': forms.Textarea(attrs={'class':'editable medium-editor-textarea'})
         }
