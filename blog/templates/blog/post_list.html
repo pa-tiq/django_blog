@@ -8,13 +8,17 @@
     >
       <h1>{{ post.title }}</h1>
       <div class="date">
-        <div>Published on {{post.published_date|date:"D M Y H:m"}} by
-          <div style="display: inline" class="fw-bolder">{{post.author}}</div></div>
         <div>
-          Comments: {{post.approved_comments.count}}
+          Published at {{post.published_date|date:"D M Y H:m"}} by
+          <div style="display: inline" class="fw-bolder">{{post.author}}</div>
         </div>
+        <div>Comments: {{post.approved_comments.count}}</div>
       </div>
     </a>
+    {% empty %}
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h1>There aren't any posts!</h1>
+    </div>
     {% endfor %}
   </ul>
 </div>

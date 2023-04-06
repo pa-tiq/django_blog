@@ -7,7 +7,8 @@ urlpatterns = [
     path("", views.PostListView.as_view(), name="post_list"),
     path("about/", views.AboutView.as_view(), name="about"),
     path("drafts/", views.DraftListView.as_view(), name="post_draft_list"),
-    path("post/create/", views.PostCreateView.as_view(), name="post_create"),
+    #path("post/create/", views.PostCreateView.as_view(), name="post_create"),
+    path("post/create/", views.create_post, name="post_create"),
     re_path(r"^post/(?P<pk>\d+)/$", views.PostDetailView.as_view(), name="post_detail"),
     re_path(
         r"^post/(?P<pk>\d+)/update/$",

@@ -2,13 +2,16 @@
 {% block content %} 
 <div class="centerstage">
   <ul class="list-group">
-    {% for post in posts %}
+    {% for post in drafts %}
       {% if post.author == user %}
-        <div class="post">
-          <p class="date">Created at {{post.create_date|date:'d-m-Y'}}</p>
-          <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-          <p>{{post.text|truncatechars:200}}</p>
-        </div>
+      <a
+        class="list-group-item list-group-item-action"
+        href="{% url 'blog:post_detail' pk=post.pk %}"
+      >
+        <h1>{{ post.title }}</h1>
+          <p class="date">Created at {{post.create_date|date:'d-m-Y'}} by {{post.author}}</p>
+          <p>{{post.text|safe|linebreaksbr|truncatechars:50}}</p>
+      </a>
       {% endif %}
       {% empty %}
       <div class="h-100 p-5 bg-light border rounded-3">

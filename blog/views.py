@@ -40,11 +40,24 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class PostCreateView(LoginRequiredMixin, CreateView):
-    login_url = "login/"
-    redirect_field_name = "blog/post_detail.html"
-    form_class = PostForm
-    model = Post
+#class PostCreateView(LoginRequiredMixin, CreateView):
+#    login_url = "login/"
+#    redirect_field_name = "blog/post_detail.html"
+#    form_class = PostForm
+#    model = Post
+#    
+#    def get(self, request):
+#        form = self.form_class(initial=self.initial)
+#        return render(request, 'blog/post_form.html',{'form':form})
+#
+#    
+#    def post(self, request):
+#        form = self.form_class(request.POST)
+#        if form.is_valid():
+#            post = form.save(commit=False)
+#            post.author = request.user
+#            post.save()
+#            return redirect('blog:post_detail',pk=post.pk)
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
@@ -57,11 +70,12 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 class PostRemoveView(LoginRequiredMixin, DeleteView):
     model = Post
     # reverse_lazy waits until the delete is done to redirect you
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("blog:post_list")
 
 
 class DraftListView(LoginRequiredMixin, ListView):
     template_name = "post_draft_list.html"
+    context_object_name = 'drafts'
     login_url = "login/"
     model = Post
     
@@ -74,6 +88,19 @@ class DraftListView(LoginRequiredMixin, ListView):
             ORDER BY create_date ASC
             """
         )
+        
+@login_required        
+def create_post(request):
+    if request.method == 'POST':   
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('blog:post_detail',pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_form.html',{'form':form})
 
 @login_required
 def add_comment_to_post(request,pk):
