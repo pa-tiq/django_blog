@@ -4,7 +4,7 @@ Create and activate virtual environment:
 ```bash
 conda create --name django_blog django 
 activate django_blog
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 Create and run migrations:
