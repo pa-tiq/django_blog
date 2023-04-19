@@ -1,23 +1,24 @@
-{% extends 'blog/base.html' %} 
-{% block content %} 
+{% extends 'blog/base.html' %} {% block content %}
 <div class="centerstage">
   <ul class="list-group">
-    {% for post in drafts %}
-      {% if post.author == user %}
-      <a
-        class="list-group-item list-group-item-action"
-        href="{% url 'blog:post_detail' pk=post.pk %}"
-      >
-        <h1>{{ post.title }}</h1>
-          <p class="date">Created at {{post.create_date|date:'d-m-Y'}} by {{post.author}}</p>
-          <p>{{post.text|safe|linebreaksbr|truncatechars:50}}</p>
-      </a>
-      {% endif %}
-      {% empty %}
-      <div class="h-100 p-5 bg-light border rounded-3">
-        <h1>You don't have any drafts!</h1>
+    {% for post in drafts %} {% if post.author == user %}
+    <a
+      class="list-group-item list-group-item-action"
+      href="{% url 'blog:post_detail' pk=post.pk %}"
+    >
+      <h1>{{ post.title }}</h1>
+      <div>
+        Created on {{post.create_date|date:"d/m/Y"}} at
+        {{post.create_date|date:"H:m"}} by
+        <div style="display: inline" class="fw-bolder">{{post.author}}</div>
       </div>
-    {% endfor %} 
+      <p>{{post.text|safe|linebreaksbr|truncatechars:50}}</p>
+    </a>
+    {% endif %} {% empty %}
+    <div class="h-100 p-5 bg-light border rounded-3">
+      <h1>You don't have any drafts!</h1>
+    </div>
+    {% endfor %}
   </ul>
 </div>
 {% endblock content %}

@@ -8,18 +8,23 @@
   <div class="inline fw-bolder">{{post.author}}</div>
 </div>
 {% elif post.author == user %}
-<a class="btn btn-info text-center" href="{% url 'blog:post_publish' pk=post.pk %}"
+<a
+  class="btn btn-info text-center"
+  href="{% url 'blog:post_publish' pk=post.pk %}"
   >Publish</a
 >
 {% endif %}
 <br />
 {% if post.author == user or post.published_date %}
-<p class="text-break postcontent" >{{post.text|safe|linebreaksbr}}</p>
+<p class="text-break postcontent">
+  {% autoescape off %}
+    {{ post.text |safe }}
+  {% endautoescape %}
+</p>
 {% else %}
 <p class="postcontent fst-italic">Post not yet published by author</p>
 
-{% endif %}
-{% if user.is_authenticated and post.author == user %}
+{% endif %} {% if user.is_authenticated and post.author == user %}
 <a class="btn btn-primary" href="{% url 'blog:post_edit' pk=post.pk %}">Edit</a>
 <a class="btn btn-danger" href="{% url 'blog:post_remove' pk=post.pk %}"
   >Remove</a
@@ -40,7 +45,6 @@
     <li class="list-group-item">
       {% if user.is_authenticated or comment.approved_comment %}
         {{comment.create_date}} 
-
         {% if not comment.approved_comment and post.author == user %}
           <a
             class="btn btn-danger"
@@ -53,20 +57,19 @@
             >Approve</a
           >
         {% endif %} 
-
         {% if comment.approved_comment or post.author == user %}
           <p class="fst-italic">{{comment.text|safe|linebreaks}}</p>
         {% else %}
           <p class="fst-italic">Comment not yet approved by post author.</p>
         {% endif %}
-          <div class="inline">
-            Posted by
-            <div class="inline fw-bolder">{{comment.author}}</div>
-          </div>
+        <div class="inline">
+          Posted by
+          <div class="inline fw-bolder">{{comment.author}}</div>
+        </div>
       {% endif %}
     </li>
     {% empty %}
-    <p class="fw-bold ">No Comments!</p>
+    <p class="fw-bold">No Comments!</p>
     {% endfor %}
   </ul>
 </div>

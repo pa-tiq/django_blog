@@ -9,7 +9,8 @@
       <h1>{{ post.title }}</h1>
       <div class="date">
         <div>
-          Published at {{post.published_date|date:"D M Y H:m"}} by
+          Published on {{post.published_date|date:"d/m/Y"}} at
+          {{post.published_date|date:"H:m"}} by
           <div style="display: inline" class="fw-bolder">{{post.author}}</div>
         </div>
         <div>Comments: {{post.approved_comments.count}}</div>
